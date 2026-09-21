@@ -1,16 +1,18 @@
-import generated.Practice2.Practice2Lexer;
+import generated.week2.week2Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Token;
-import java.io.IOException;
 
-public class Practice2 {
-    public static void main(String[] args) throws IOException {
-        CharStream charStream = CharStreams.fromFileName("src/main/java/practice2.in");
-        Practice2Lexer lexer = new Practice2Lexer(charStream);
+public class Week2 {
+    public static void main(String[] args) {
+        CharStream charStream =
+                CharStreams.fromString("257.016.299.233");   //IP地址识别
+//257.016.003.233 257.016.299.233 010.016.124.233
+        week2Lexer lexer = new week2Lexer(charStream);
 
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        CommonTokenStream tokens =
+                new CommonTokenStream(lexer);
 
         tokens.fill();
 

@@ -1,14 +1,14 @@
-import generated.Calc1.Calc1Lexer;
+import generated.week1.week1Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Token;
 
-public class Main {
+public class Week1 {
     public static void main(String[] args) {
         // 从字符串获取字符流。若要从文件读取，可使用 CharStreams.fromFileName("文件路径")
         CharStream charStream = CharStreams.fromString("1 + 2");
-        Calc1Lexer lexer = new Calc1Lexer(charStream);
+        week1Lexer lexer = new week1Lexer(charStream);
 
         // 基于词法分析器实例，创建 Token 流
         CommonTokenStream tokens = new CommonTokenStream(lexer);

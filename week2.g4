@@ -1,4 +1,4 @@
-grammar Practice1;
+grammar week2;
 
 expr  	: factor DOT factor DOT factor DOT factor
         ;

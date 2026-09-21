@@ -1,4 +1,4 @@
-grammar Calc1;
+grammar week1;
 
 expr  	: expr MUL expr
 	 	| expr DIV expr

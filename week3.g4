@@ -1,4 +1,4 @@
-grammar Practice2;
+grammar week3;
 
 fragment ESCAPED_QUOTE: '\\''"';
 
