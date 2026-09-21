@@ -1,7 +1,6 @@
 grammar Practice1;
 
 expr  	: factor DOT factor DOT factor DOT factor
-	| factor
         ;
 
 factor  : NUMBER
