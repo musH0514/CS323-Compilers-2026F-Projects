@@ -8,7 +8,7 @@ public class Week2 {
     public static void main(String[] args) {
         CharStream charStream =
                 CharStreams.fromString("257.016.299.233");   //IP地址识别
-//257.016.003.233 257.016.299.233 010.016.124.233
+    //257.016.003.233 257.016.299.233 010.016.124.233
         week2Lexer lexer = new week2Lexer(charStream);
 
         CommonTokenStream tokens =

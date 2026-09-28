@@ -1,4 +1,4 @@
-grammar week3;
+lexer grammar week3;
 
 fragment ESCAPED_QUOTE: '\\''"';
 

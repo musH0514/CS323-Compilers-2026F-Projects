@@ -1,4 +1,4 @@
-import generated.week3.week3Lexer;
+import generated.week3.week3;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -8,7 +8,7 @@ import java.io.IOException;
 public class Week3 {
     public static void main(String[] args) throws IOException {
         CharStream charStream = CharStreams.fromFileName("src/main/java/week3.in");
-        week3Lexer lexer = new week3Lexer(charStream);
+        week3 lexer = new week3(charStream);
 
         CommonTokenStream tokens = new CommonTokenStream(lexer);
 
