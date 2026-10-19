@@ -15,7 +15,7 @@ public class Week6 {
         week6Parser parser = new week6Parser(tokens);
         // 定义Visitor根节点 root context
         week6Parser.RootContext context = parser.root();
-        CalcLab5Visitor visitor = new CalcLab5Visitor();
+        CalcWeek6Visitor visitor = new CalcWeek6Visitor();
         for (week6Parser.ExprContext expr : context.expr()) {
             System.out.printf("%s = %s\n", expr.getText(), visitor.visit(expr));
         }

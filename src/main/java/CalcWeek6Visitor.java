@@ -1,8 +1,8 @@
 import generated.week6.week6Parser;
 import generated.week6.week6BaseVisitor;
 
-public class CalcLab5Visitor extends week6BaseVisitor<Double> {
-    public CalcLab5Visitor() {}
+public class CalcWeek6Visitor extends week6BaseVisitor<Double> {
+    public CalcWeek6Visitor() {}
 
     public Double visit(week6Parser.ExprContext expr) {
         return super.visit(expr);
