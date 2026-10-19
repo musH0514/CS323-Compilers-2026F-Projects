@@ -56,14 +56,92 @@ public class Week7Visitor extends week7BaseVisitor<Void> {
 
     //Function Define:
     private void visitFuncDef(week7Parser.GlobalDefContext ctx) {
-        //TODO: Finish Base2 here: Redeclaration Error
+        String functionName = ctx.Identifier().getText();
+        if (currentScope.lookupFunction(functionName) != null) {
+            errors.add(SplcSemanticError.redeclaration(ctx.Identifier()));
+            return;
+        }
 
+        List<VariableSymbol> parameters = collectParameters(ctx.funcArgs());
+        currentScope.defineFunction(functionName, resolveType(ctx.specifier()), parameters);
+
+        FunctionSymbol function = currentScope.lookupFunction(functionName);
+        if (function == null) {
+            return;
+        }
+
+        Scope enclosingScope = currentScope;
+        currentScope = function;
+        try {
+            for (VariableSymbol parameter : parameters) {
+                currentScope.defineVariable(parameter.getName(), parameter.getType());
+            }
+            for (week7Parser.StatementContext statement : ctx.statement()) {
+                visit(statement);
+            }
+        } finally {
+            currentScope = enclosingScope;
+        }
     }
 
 
     //Variable Declare:
     private void visitVariableDec(week7Parser.GlobalDefContext ctx) {
-        //TODO: Finish Base1: Redefinition Error
+        String variableName = ctx.Identifier().getText();
+        if (currentScope.lookupCurrentVariable(variableName) != null) {
+            errors.add(SplcSemanticError.redefinition(ctx.Identifier()));
+            return;
+        }
+
+        currentScope.defineVariable(variableName, resolveType(ctx.specifier()));
+    }
+
+    @Override
+    public Void visitCombineStmt(week7Parser.CombineStmtContext ctx) {
+        Scope enclosingScope = currentScope;
+        currentScope = new Scope(enclosingScope);
+        try {
+            for (week7Parser.StatementContext statement : ctx.statement()) {
+                visit(statement);
+            }
+        } finally {
+            currentScope = enclosingScope;
+        }
+        return null;
+    }
+
+    @Override
+    public Void visitLocalVariableStmt(week7Parser.LocalVariableStmtContext ctx) {
+        String variableName = ctx.Identifier().getText();
+        if (currentScope.lookupCurrentVariable(variableName) != null) {
+            errors.add(SplcSemanticError.redeclaration(ctx.Identifier()));
+        } else {
+            currentScope.defineVariable(variableName, resolveType(ctx.specifier()));
+        }
+
+        if (ctx.expression() != null) {
+            visit(ctx.expression());
+        }
+        return null;
+    }
+
+    private List<VariableSymbol> collectParameters(week7Parser.FuncArgsContext ctx) {
+        List<VariableSymbol> parameters = new ArrayList<>();
+        for (int i = 0; i < ctx.Identifier().size(); i++) {
+            String parameterName = ctx.Identifier(i).getText();
+            boolean duplicate = false;
+            for (VariableSymbol parameter : parameters) {
+                if (parameter.getName().equals(parameterName)) {
+                    errors.add(SplcSemanticError.redeclaration(ctx.Identifier(i)));
+                    duplicate = true;
+                    break;
+                }
+            }
+            if (!duplicate) {
+                parameters.add(new VariableSymbol(parameterName, resolveType(ctx.specifier(i))));
+            }
+        }
+        return parameters;
     }
 
     private Type resolveType(week7Parser.SpecifierContext ctx) {
@@ -75,5 +153,4 @@ public class Week7Visitor extends week7BaseVisitor<Void> {
             return PrimitiveType.VOID;
         }
     }
-
 }
