@@ -2,6 +2,8 @@
 #### Ignore generated ####
 src/main/java/generated
 
+testcases
+
 *.tar
 *.tar.gz
 .myapi.key
@@ -29,6 +31,7 @@ target/
 .springBeans
 .sts4-cache
 bin
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
