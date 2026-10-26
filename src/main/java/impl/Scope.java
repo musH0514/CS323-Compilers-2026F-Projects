@@ -40,6 +40,7 @@ public class Scope {
 
         if (!variables.containsKey(name)) {
             variables.put(name, new VariableSymbol(name, type));
+            return variables.get(name);
         }
         return null;
     }
@@ -52,6 +53,7 @@ public class Scope {
 
         if (!functions.containsKey(name)) {
             functions.put(name, new FunctionSymbol(name, returnType, params, this));
+            return functions.get(name);
         }
         return null;
     }
