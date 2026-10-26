@@ -63,8 +63,8 @@ public class Week7Visitor extends week7BaseVisitor<Void> {
         }
 
         List<VariableSymbol> parameters = collectParameters(ctx.funcArgs());
+        
         currentScope.defineFunction(functionName, resolveType(ctx.specifier()), parameters);
-
         FunctionSymbol function = currentScope.lookupFunction(functionName);
         if (function == null) {
             return;
@@ -82,6 +82,25 @@ public class Week7Visitor extends week7BaseVisitor<Void> {
         } finally {
             currentScope = enclosingScope;
         }
+    }
+
+    private List<VariableSymbol> collectParameters(week7Parser.FuncArgsContext ctx) {
+        List<VariableSymbol> parameters = new ArrayList<>();
+        for (int i = 0; i < ctx.Identifier().size(); i++) {
+            String parameterName = ctx.Identifier(i).getText();
+            boolean duplicate = false;
+            for (VariableSymbol parameter : parameters) {
+                if (parameter.getName().equals(parameterName)) {
+                    errors.add(SplcSemanticError.redeclaration(ctx.Identifier(i)));
+                    duplicate = true;
+                    break;
+                }
+            }
+            if (!duplicate) {
+                parameters.add(new VariableSymbol(parameterName, resolveType(ctx.specifier(i))));
+            }
+        }
+        return parameters;
     }
 
 
@@ -123,25 +142,6 @@ public class Week7Visitor extends week7BaseVisitor<Void> {
             visit(ctx.expression());
         }
         return null;
-    }
-
-    private List<VariableSymbol> collectParameters(week7Parser.FuncArgsContext ctx) {
-        List<VariableSymbol> parameters = new ArrayList<>();
-        for (int i = 0; i < ctx.Identifier().size(); i++) {
-            String parameterName = ctx.Identifier(i).getText();
-            boolean duplicate = false;
-            for (VariableSymbol parameter : parameters) {
-                if (parameter.getName().equals(parameterName)) {
-                    errors.add(SplcSemanticError.redeclaration(ctx.Identifier(i)));
-                    duplicate = true;
-                    break;
-                }
-            }
-            if (!duplicate) {
-                parameters.add(new VariableSymbol(parameterName, resolveType(ctx.specifier(i))));
-            }
-        }
-        return parameters;
     }
 
     private Type resolveType(week7Parser.SpecifierContext ctx) {
