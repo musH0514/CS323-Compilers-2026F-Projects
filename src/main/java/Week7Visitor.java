@@ -83,7 +83,6 @@ public class Week7Visitor extends week7BaseVisitor<Void> {
             currentScope = enclosingScope;
         }
     }
-
     private List<VariableSymbol> collectParameters(week7Parser.FuncArgsContext ctx) {
         List<VariableSymbol> parameters = new ArrayList<>();
         for (int i = 0; i < ctx.Identifier().size(); i++) {
@@ -102,7 +101,6 @@ public class Week7Visitor extends week7BaseVisitor<Void> {
         }
         return parameters;
     }
-
 
     //Variable Declare:
     private void visitVariableDec(week7Parser.GlobalDefContext ctx) {

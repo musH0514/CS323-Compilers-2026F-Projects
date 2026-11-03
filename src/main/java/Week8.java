@@ -17,12 +17,13 @@ public class Week8 {
     public static void main(String[] args) {
         CharStream input = null;
         try {
-            input = CharStreams.fromFileName("testcases/semantic1/base2.splc");
+            input = CharStreams.fromFileName("testcases/semantic1/base4.splc");
             week8Lexer lexer = new week8Lexer(input);
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             week8Parser parser = new week8Parser(tokens);
             week8Parser.ProgramContext program = parser.program();
-//            visitorTraverse(program);
+            visitorTraverse(program);
+            System.out.println("\n");
             listenerTraverse(program);
 
         } catch (IOException e) {
