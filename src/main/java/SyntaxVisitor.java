@@ -120,9 +120,8 @@ public class SyntaxVisitor extends week8BaseVisitor<Void> {
         week8Parser.VarDecContext varDec = ctx.varDec();
         TerminalNode identifier = getVarIdentifier(varDec);
         Type variableType = getVarType(baseType, varDec);
-
-        VariableSymbol variable = currentScope.defineVariable(
-                identifier.getText(), variableType);
+        VariableSymbol variable = currentScope.defineVariable(identifier.getText(), variableType);
+        
         if (variable == null) {
             errors.add(SplcSemanticError.redefinition(identifier));
         } else {

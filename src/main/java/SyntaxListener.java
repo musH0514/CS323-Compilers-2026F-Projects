@@ -140,8 +140,7 @@ public class SyntaxListener extends week8BaseListener {
 
         Type valueType = inferExpressionType(expression);
         if (valueType != null && !(valueType instanceof ArrayType)) {
-            errors.add(SplcSemanticError.incompatibleType(
-                    identifier, variableType, valueType));
+            errors.add(SplcSemanticError.incompatibleType(identifier, variableType, valueType));
         }
     }
 
