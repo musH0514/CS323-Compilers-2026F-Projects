@@ -1,19 +1,17 @@
-; ModuleID = 'order.c'
-source_filename = "order.c"
+; ModuleID = 'week11.c'
+source_filename = "week11.c"
 target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128"
 target triple = "x86_64-pc-linux-gnu"
 
 ; Function Attrs: mustprogress nofree norecurse nosync nounwind willreturn memory(none) uwtable
-define dso_local range(i32 -2147483643, 2147483644) i32 @finalPrice(i32 noundef %unitPrice, i32 noundef %quantity) local_unnamed_addr #0 {
-entry:
-  %mul = mul nsw i32 %quantity, %unitPrice
-  %sub = add nsw i32 %mul, 5
-  ret i32 %sub
+define dso_local range(i32 -2147483643, 2147483644) i32 @finalPrice(i32 noundef %0, i32 noundef %1) local_unnamed_addr #0 {
+  %3 = mul nsw i32 %1, %0
+  %4 = add nsw i32 %3, 5
+  ret i32 %4
 }
 
 ; Function Attrs: mustprogress nofree norecurse nosync nounwind willreturn memory(none) uwtable
 define dso_local noundef range(i32 -2147483643, 2147483644) i32 @main() local_unnamed_addr #0 {
-entry:
   ret i32 20
 }
 
