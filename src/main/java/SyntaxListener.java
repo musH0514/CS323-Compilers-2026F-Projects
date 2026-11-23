@@ -139,13 +139,13 @@ public class SyntaxListener extends week8BaseListener {
         }
 
         Type valueType = inferExpressionType(expression);
-        if (valueType != null && !(valueType instanceof ArrayType)) {
+        if (valueType != null && !(valueType instanceof ArrayType)) {   //检查类型是否匹配
             errors.add(SplcSemanticError.incompatibleType(identifier, variableType, valueType));
         }
     }
 
     @Override
-    public void enterExpression(week8Parser.ExpressionContext ctx) {
+    public void enterExpression(week8Parser.ExpressionContext ctx) {    //判断赋值表达式
         if (ctx.ASSIGN() == null || ctx.expression().size() != 2) {
             return;
         }
