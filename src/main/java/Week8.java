@@ -12,7 +12,6 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import java.io.IOException;
 import java.util.List;
 
-
 public class Week8 {
     public static void main(String[] args) {
         CharStream input = null;
